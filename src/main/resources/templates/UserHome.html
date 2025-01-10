@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>
-			User Home page
-		</title>
-	</head>
-	<body>
-		<h1>Welcome ${user}</h1>
-	</body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        Welcome, <span id="user-name">User</span>
+    </header>
+    <main>
+        <h2>Add Expense</h2>
+        <div class="form-group">
+            <label for="expense-input">Enter amount (in Rupees):</label>
+            <input type="text" id="expense-input" placeholder="e.g., 500">
+        </div>
+        <button id="submit-btn">Submit</button>
+        <div id="response-message" class="response-message" style="display: none;"></div>
+    </main>
+
+    <script src="finance.js"></script>
+</body>
 </html>
