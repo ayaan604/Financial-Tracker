@@ -8,5 +8,9 @@ import com.projects.financialtrackerapplication.entity.User;
 public interface FinancialTrackerService {
 	public void addExpense(Expense expense);
 	
-	public List<Expense> getExpensesByUserId(User user);
+	public void addUser(User user);
+	
+	public User getUserById(long id);
+	
+	public List<Expense> getExpensesByUserId(Long id);
 }
