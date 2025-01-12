@@ -26,12 +26,7 @@ public class FinancialTrackerServiceImpl implements FinancialTrackerService {
 		
 		System.out.println("Expense successfully added to DB : " + expense);
 	}
-
-	@Override
-	public List<Expense> getExpensesByUserId(Long id) {
-		return expenseRepository.findByUserId(id);
-	}
-
+	
 	@Override
 	public void addUser(User user) {
 		userRepository.save(user);
@@ -41,7 +36,12 @@ public class FinancialTrackerServiceImpl implements FinancialTrackerService {
 
 	@Override
 	public User getUserById(long id) {
-		return userRepository.getById(id);
+		return userRepository.findByUserId(id);
+	}
+
+	@Override
+	public List<Expense> getExpensesByUser(User user) {
+		return expenseRepository.findByUser(user);
 	}
 
 }

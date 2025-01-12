@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,7 +16,10 @@ public class Expense {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long expenseId;
 	
-	private long userId;
+	@OneToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
+	private User user;
+
 	private long amount;
 	private String description;
 	private java.sql.Date timestamp;
@@ -25,12 +30,7 @@ public class Expense {
 	public void setExpenseId(long expenseId) {
 		this.expenseId = expenseId;
 	}
-	public long getUserId() {
-		return userId;
-	}
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
+
 	public long getAmount() {
 		return amount;
 	}
@@ -49,9 +49,17 @@ public class Expense {
 	public void setTimestamp(java.sql.Date timestamp) {
 		this.timestamp = timestamp;
 	}
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	@Override
 	public String toString() {
-		return "Expense [expenseId=" + expenseId + ", userId=" + userId + ", amount=" + amount + ", description="
+		return "Expense [expenseId=" + expenseId + ", user=" + user.getName() + ", amount=" + amount + ", description="
 				+ description + ", timestamp=" + timestamp + "]";
 	}
 }

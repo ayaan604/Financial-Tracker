@@ -12,5 +12,5 @@ public interface FinancialTrackerService {
 	
 	public User getUserById(long id);
 	
-	public List<Expense> getExpensesByUserId(Long id);
+	public List<Expense> getExpensesByUser(User user);
 }

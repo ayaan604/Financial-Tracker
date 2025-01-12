@@ -22,9 +22,9 @@ public class FinancialTrackerApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		addExpense();
+//		addExpense();
 //		addUser();
-//		getExpenseList();
+		getExpenseList();
 	}
 	
 	private void addExpense() {
@@ -34,7 +34,7 @@ public class FinancialTrackerApplication implements CommandLineRunner{
 			exp.setAmount(540);
 			exp.setDescription("Zak's Cafe butter chicken pizza");
 			exp.setTimestamp(new java.sql.Date(System.currentTimeMillis()));
-			exp.setUserId(1);
+			exp.setUser(service.getUserById(1));
 			
 			service.addExpense(exp);
 		} catch(Exception e) {
@@ -67,7 +67,7 @@ public class FinancialTrackerApplication implements CommandLineRunner{
 		
 //		User user = service.getUserById(userId);
 
-		List<Expense> expenses = service.getExpensesByUserId(userId);
+		List<Expense> expenses = service.getExpensesByUser(service.getUserById(userId));
 		
 		System.out.println("Listing all expenses of user");
 		for(Expense exp : expenses) {
