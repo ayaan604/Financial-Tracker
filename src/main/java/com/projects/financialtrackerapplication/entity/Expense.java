@@ -1,5 +1,6 @@
 package com.projects.financialtrackerapplication.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +17,7 @@ public class Expense {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long expenseId;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private User user;
 

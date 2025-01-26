@@ -24,7 +24,7 @@ public class FinancialTrackerApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 //		addExpense();
 //		addUser();
-		getExpenseList();
+//		getExpenseList();
 	}
 	
 	private void addExpense() {

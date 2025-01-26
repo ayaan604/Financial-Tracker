@@ -13,4 +13,6 @@ public interface FinancialTrackerService {
 	public User getUserById(long id);
 	
 	public List<Expense> getExpensesByUser(User user);
+	
+	public void registerUser(User user, String password) throws Exception;
 }

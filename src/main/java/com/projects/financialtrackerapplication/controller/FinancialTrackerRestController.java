@@ -1,10 +1,6 @@
 package com.projects.financialtrackerapplication.controller;
 
-import static com.projects.financialtrackerapplication.constants.FinancialTrackerConstants.DEFAULT_ERR_RESP;
-import static com.projects.financialtrackerapplication.constants.FinancialTrackerConstants.ERROR_CODE_FAILURE;
-import static com.projects.financialtrackerapplication.constants.FinancialTrackerConstants.ERROR_CODE_SUCCESS;
-import static com.projects.financialtrackerapplication.constants.FinancialTrackerConstants.MSG_EXPENSE_ADDED;
-import static com.projects.financialtrackerapplication.constants.FinancialTrackerConstants.MSG_EXPENSE_ADD_FAIL;
+import static com.projects.financialtrackerapplication.constants.FinancialTrackerConstants.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projects.financialtrackerapplication.dto.ExpenseDTO;
 import com.projects.financialtrackerapplication.dto.TransactionStatus;
+import com.projects.financialtrackerapplication.dto.UserDTO;
 import com.projects.financialtrackerapplication.entity.Expense;
+import com.projects.financialtrackerapplication.entity.User;
 import com.projects.financialtrackerapplication.service.FinancialTrackerService;
 import com.projects.financialtrackerapplication.util.FinancialTrackerUtil;
 
@@ -65,6 +63,50 @@ public class FinancialTrackerRestController {
 		}
 		
 		return response;
+	}
+	
+	@PostMapping(path = "/registerUser")
+	public String registerUser(@RequestBody String requestJson) {
+		
+		UserDTO userDto = new UserDTO();
+		TransactionStatus status = new TransactionStatus();
+		String response = "";
+		try {
+			System.out.println(requestJson);
+			userDto = mapper.readValue(requestJson, UserDTO.class);
+			User user = mapUserDtoToEntity(userDto);
+			
+			service.registerUser(user, userDto.getPassword());
+			
+			status.setErrorCode(ERROR_CODE_SUCCESS);
+			status.setErrorMessage(MSG_USER_ADDED);
+			
+		} catch(Exception e) {
+			System.out.println("Exception encountered in "+THIS_COMPONENT + " while adding expense");
+			e.printStackTrace();
+			
+			status.setErrorCode(ERROR_CODE_FAILURE);
+			status.setErrorMessage(MSG_USER_ADD_FAIL);
+		}
+		
+		try {
+			response = mapper.writeValueAsString(status);
+		} catch(Exception e) {
+			response = DEFAULT_ERR_RESP;
+		}
+		
+		return response;
+	}
+
+	private User mapUserDtoToEntity(UserDTO userDto) {
+		User user = new User();
+		
+		user.setAge(userDto.getAge());
+		user.setEmail(userDto.getEmail());
+		user.setIncome(userDto.getIncome());
+		user.setName(userDto.getName());
+		
+		return user;
 	}
 
 	private void mapExpenseDtoToEntity(ExpenseDTO expenseDto, Expense expense) {

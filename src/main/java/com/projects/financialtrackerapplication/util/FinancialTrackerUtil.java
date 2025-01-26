@@ -17,6 +17,6 @@ public class FinancialTrackerUtil {
 	}
 	
 	public java.sql.Date convertEpochToSqlDate(String timestamp){
-		return new java.sql.Date(Long.parseLong(timestamp));
+		return new java.sql.Date(Long.parseLong(timestamp)*1000);
 	}
 }
