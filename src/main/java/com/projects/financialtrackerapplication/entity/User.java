@@ -1,10 +1,15 @@
 package com.projects.financialtrackerapplication.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +24,10 @@ public class User {
 	private int age;
 	private String email;
 	private long income;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//	@JoinColumn(name = "expenseId")
+	private List<Expense> expenses;
 	
 	public long getUserId() {
 		return userId;

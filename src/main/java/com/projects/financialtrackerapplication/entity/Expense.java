@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,8 +17,8 @@ public class Expense {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long expenseId;
 	
-	@OneToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
 	private long amount;

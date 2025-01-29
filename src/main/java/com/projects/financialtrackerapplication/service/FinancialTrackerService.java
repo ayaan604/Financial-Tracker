@@ -15,4 +15,6 @@ public interface FinancialTrackerService {
 	public List<Expense> getExpensesByUser(User user);
 	
 	public void registerUser(User user, String password) throws Exception;
+	
+	public void deleteUser(User user);
 }

@@ -61,4 +61,14 @@ public class FinancialTrackerServiceImpl implements FinancialTrackerService {
 		userRepository.save(user);
 	}
 
+	@Override
+	@Transactional
+	public void deleteUser(User user) {
+		System.out.println("Deleting user : " + user);
+		
+		jdbc.deleteUserAuth(user.getEmail());
+		
+		userRepository.delete(user);
+	}
+
 }
